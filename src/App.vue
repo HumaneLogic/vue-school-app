@@ -10,7 +10,7 @@ console.log(supabase)
 </template>
 
 <!--
- 1.SPA: RouterView from vue-router - vue-router maps components to routs - uses the browser history api to handle navigating between pages without reloading the entire page
+ 1.SPA: RouterView from vue-router - vue-router maps components to routs - it uses the browser history api to handle navigating between pages without reloading the entire page
  2.lazy loading  - dynamic imports - load components only when needed
  3.file-based routing
 -->
