@@ -37,3 +37,6 @@ const projects = ref<Tables<'projects'>[] | null>(null)
 </template>
 
 <!-- reactive variables: vue watches for changes in the variable and updates the dom accordingly -->
+
+<!--  -->
+<!-- npx supabase migration up --linked -->
