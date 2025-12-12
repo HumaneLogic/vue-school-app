@@ -24,7 +24,7 @@ const projects = ref<Tables<'projects'>[] | null>(null)
 <template>
   <div>
     <h1>Projects</h1>
-    <RouterLink to="/">Go to Home </RouterLink>
+    <RouterLink to="/">Home</RouterLink>
     <!-- we don't have to add .value , vue adds it -->
     <!-- now the template reacts to the changes that happens to projects variable-->
     <!-- {{ projects ? projects[0] : '' }} -->
