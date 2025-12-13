@@ -15,6 +15,7 @@ const tasks = ref<Tables<'tasks'>[] | null>(null)
 <template>
   <div>
     <h1>Tasks</h1>
+
     <RouterLink to="/">Home</RouterLink>
     <ul>
       <li v-for="task in tasks" :key="task.id">
