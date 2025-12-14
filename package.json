@@ -23,10 +23,12 @@
     "supabase:types": "npx supabase gen types typescript --project-id znnvrgurzdwfqqmcyoxr --schema public > database/types.ts"
   },
   "dependencies": {
+    "@iconify/json": "^2.2.418",
     "@supabase/supabase-js": "^2.87.0",
     "@vueuse/core": "^14.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "iconify-icon": "^3.0.2",
     "lucide-vue-next": "^0.561.0",
     "pinia": "^3.0.4",
     "reka-ui": "^2.6.1",
@@ -36,6 +38,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^10.1.0",
+    "@iconify/tailwind4": "^1.2.0",
     "@tailwindcss/vite": "^4.1.18",
     "@tsconfig/node24": "^24.0.3",
     "@types/node": "^24.10.1",
