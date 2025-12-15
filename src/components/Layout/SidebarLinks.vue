@@ -21,9 +21,3 @@ defineProps<{
     <span class="hidden lg:block text-nowrap">{{ link.title }}</span>
   </RouterLink>
 </template>
-
-<!-- <style scoped>
-.router-link-active {
-  background-color: black;
-}
-</style> -->
