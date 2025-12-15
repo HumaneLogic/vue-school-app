@@ -1,4 +1,42 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SidebarLinks from './SidebarLinks.vue'
+
+const links = [
+  {
+    title: 'Dashboard',
+    to: '/',
+    icon: 'lucide:layout-dashboard',
+  },
+  {
+    title: 'Projects',
+    to: '/projects',
+    icon: 'lucide:house',
+  },
+  {
+    title: 'My Tasks',
+    to: '/tasks',
+    icon: 'streamline-freehand:task-list-pin-1',
+  },
+]
+
+const accountLinks = [
+  {
+    title: 'Profile',
+    to: '/profile',
+    icon: 'iconoir:profile-circle',
+  },
+  {
+    title: 'Settings',
+    to: '/settings',
+    icon: 'line-md:cog-filled-loop',
+  },
+  {
+    title: 'Sign Out',
+    to: '/signout',
+    icon: 'si:sign-out-alt-line',
+  },
+]
+</script>
 <template>
   <aside
     class="flex flex-col h-screen gap-2 border-r fixed bg-muted/40 lg:w-52 w-16 transition-[width]"
@@ -15,56 +53,12 @@
 
     <nav class="flex flex-col gap-2 justify-between h-full relative">
       <div>
-        <RouterLink
-          to="/"
-          class="flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:hover:scale-105 hover:text-blue-300"
-        >
-          <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
-          <span class="hidden lg:block text-nowrap">Dashboard</span>
-        </RouterLink>
-
-        <RouterLink
-          to="/projects"
-          class="flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:hover:scale-105 hover:text-blue-300"
-        >
-          <iconify-icon icon="lucide:house"></iconify-icon>
-          <span class="hidden lg:block text-nowrap">Projects</span>
-        </RouterLink>
-
-        <RouterLink
-          to="/tasks"
-          class="flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:hover:scale-105 hover:text-blue-300"
-        >
-          <iconify-icon icon="streamline-freehand:task-list-pin-1"></iconify-icon>
-          <span class="hidden lg:block text-nowrap">My Tasks</span>
-        </RouterLink>
+        <SidebarLinks :links="links" />
       </div>
 
       <div class="border-y text-center bg-background py-3">
-        <RouterLink
-          to="/profile"
-          class="flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:hover:scale-105 hover:text-blue-300"
-        >
-          <iconify-icon icon="iconoir:profile-circle"></iconify-icon>
-          <span class="hidden lg:block text-nowrap">Profile</span>
-        </RouterLink>
-        <RouterLink
-          to="/settings"
-          class="flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:hover:scale-105 hover:text-blue-300"
-        >
-          <iconify-icon icon="line-md:cog-filled-loop"></iconify-icon>
-          <span class="hidden lg:block text-nowrap">Settings</span>
-        </RouterLink>
-        <RouterLink
-          to="/signout"
-          class="flex items-center gap-3 px-4 py-2 mx-2 transition-colors rounded-lg hover:hover:scale-105 hover:text-blue-300"
-        >
-          <iconify-icon icon="si:sign-out-alt-line"></iconify-icon>
-          <span class="hidden lg:block text-nowrap">Sign Out</span>
-        </RouterLink>
+        <SidebarLinks :links="accountLinks" />
       </div>
     </nav>
   </aside>
 </template>
-
-<!-- class="border-y text-center bg-background py-3" -->
