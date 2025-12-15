@@ -1,50 +1,18 @@
 <script setup lang="ts">
 // import { supabase } from '@/lib/supabaseClient'
 // console.log(supabase)
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
+import Sidebar from '@/components/Layout/Sidebar.vue'
+import TopNavbar from '@/components/Layout/TopNavbar.vue'
 </script>
 
 <template>
-  <nav class="h-16 border-b bg-muted/40 flex justify-between px-6 items-center">
-    <form class="relative h-fit w-full max-w-96">
-      <iconify-icon
-        class="absolute top-[50%] translate-y-[-50%] left-2.5"
-        icon="lucide:search"
-      ></iconify-icon>
-
-      <Input class="w-full pl-8 bg-background" type="text" placeholder="Search..." />
-    </form>
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <!-- <div class="w-8 h-8 rounded-full bg-white"></div> -->
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  </nav>
-
-  <main>
-    <RouterView />
-  </main>
+  <Sidebar />
+  <div class="flex flex-col lg:ml-52 ml-16 transition-[margin]">
+    <TopNavbar />
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <!--
