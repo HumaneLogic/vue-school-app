@@ -1,6 +1,8 @@
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
+import AutoImport from 'unplugin-auto-import/vite'
+import { VueRouterAutoImports } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig } from 'vite'
 import vueDevTools from 'vite-plugin-vue-devtools'
@@ -9,6 +11,23 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   plugins: [
     VueRouter(),
+    AutoImport({
+      include: [
+    /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+    /\.vue$/,
+    /\.vue\?vue/, // .vue
+    /\.vue\.[tj]sx?\?vue/, // .vue (vue-loader with experimentalInlineMatchResource enabled)
+    /\.md$/, // .md
+  ],
+  imports: [
+    'vue',
+    VueRouterAutoImports,
+  ],
+  dts: true,
+  viteOptimizeDeps: true,
+
+
+}),
     vue({
       template: {
         compilerOptions: {
