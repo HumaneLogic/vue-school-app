@@ -4,6 +4,8 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
 import type { Tables } from '../../../database/types'
 
+usePageStore().pageData.title = 'Projects'
+
 const projects = ref<Tables<'projects'>[] | null>(null)
 
 const getProjects = async () => {
@@ -12,13 +14,6 @@ const getProjects = async () => {
   projects.value = data
 }
 await getProjects()
-
-// ;(async () => {
-//   const { data, error } = await supabase.from('projects').select()
-//   if (error) console.log(error)
-//   projects.value = data
-//   console.log('projects:', projects.value)
-// })()
 
 const columns: ColumnDef<Tables<'projects'>>[] = [
   {

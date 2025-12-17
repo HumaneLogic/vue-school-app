@@ -3,23 +3,18 @@ import { supabase } from '@/lib/supabaseClient'
 import type { ColumnDef } from '@tanstack/vue-table'
 import { RouterLink } from 'vue-router'
 import type { Tables } from '../../../database/types'
+import { usePageStore } from '@/stores/page'
+
+usePageStore().pageData.title = 'My Tasks'
 
 const tasks = ref<Tables<'tasks'>[] | null>(null)
 
-// suspense component will keep displaying the previous component until the new component's promises are resolved
 const getTasks = async () => {
   const { data, error } = await supabase.from('tasks').select()
   if (error) console.log(error)
   tasks.value = data
 }
 await getTasks()
-
-// at first the component will be rendered without data then data is added
-// ;(async () => {
-//   const { data, error } = await supabase.from('tasks').select()
-//   if (error) console.log(error)
-//   tasks.value = data
-// })()
 
 const columns: ColumnDef<Tables<'tasks'>>[] = [
   {
