@@ -6,11 +6,20 @@ import type { Tables } from '../../../database/types'
 
 const tasks = ref<Tables<'tasks'>[] | null>(null)
 
-;(async () => {
+// suspense component will keep displaying the previous component until the new component's promises are resolved
+const getTasks = async () => {
   const { data, error } = await supabase.from('tasks').select()
   if (error) console.log(error)
   tasks.value = data
-})()
+}
+await getTasks()
+
+// at first the component will be rendered without data then data is added
+// ;(async () => {
+//   const { data, error } = await supabase.from('tasks').select()
+//   if (error) console.log(error)
+//   tasks.value = data
+// })()
 
 const columns: ColumnDef<Tables<'tasks'>>[] = [
   {

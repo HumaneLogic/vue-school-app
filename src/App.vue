@@ -1,48 +1,18 @@
-<script setup lang="ts">
-// this gives:
-//  [Vue warn]: Component <Anonymous>: setup function returned a promise, but no <Suspense> boundary was found in the parent component tree. A component with async setup() must be nested in a <Suspense> in order to be rendered.
-// we have to do
-// <Suspense>
-//   <MocComponent />
-// </Suspense>
-// Suspense allows for top level async functions in components and renders them when they resolve
-// and
-//     <Suspense>
-//       <MocComponent />
-//      fallback is being replaced when promise is still being resolved
-//       <template #fallback>
-//         <span>Loading</span>
-//       </template>
-//     </Suspense>
+<script setup lang="ts"></script>
 
-const MocComponent = defineComponent(async () => {
-  const greet = ref('Hello')
-  await new Promise((resolve, reject) => {
-    greet.value = 'Hello from database'
-    // resolve(true)
-    // reject(true)
-    setTimeout(() => {
-      resolve(true)
-    }, 1500)
-  })
-  return () => h('p', greet.value)
-})
-
-// const MocComponent = defineComponent(() => {
-//   const greet = ref('Hello')
-//   return () => h('p', greet.value)
-// })
-</script>
+<!-- <Suspense> is designed to hold the previous component until the new one’s async setup resolves.  -->
 
 <template>
   <AuthLayout>
-    <Suspense>
-      <MocComponent />
+    <RouterView v-slot="{ Component, route }">
+      <!-- v-if="Component" means this component wouldn't work unless RouterView provides a component -->
+      <Suspense v-if="Component" :timeout="0">
+        <Component :is="Component" :key="route.name"></Component>
 
-      <template #fallback>
-        <span>Loading... </span>
-      </template>
-    </Suspense>
-    <RouterView />
+        <template #fallback>
+          <span>Loading... </span>
+        </template>
+      </Suspense>
+    </RouterView>
   </AuthLayout>
 </template>
