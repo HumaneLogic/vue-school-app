@@ -2,7 +2,7 @@
 import { projectQuery, type Project } from '@/utils/supaQueries'
 
 const route = useRoute('/projects/[slug]')
-const project = ref<Project | null>()
+const project = ref<Project | null>(null)
 
 // watch:(source, cb, options?)
 watch(
@@ -21,46 +21,57 @@ const getProjects = async () => {
 await getProjects()
 </script>
 
-<template>
+<!-- <template>
   <div>
     <h1>Project {{ route.params?.slug }}</h1>
     <RouterLink to="/">Home</RouterLink>
   </div>
-</template>
+</template> -->
 
-<!-- <template>
+<template>
   <div>
-    <Table>
+    <Table v-if="project">
       <TableRow>
         <TableHead> Name </TableHead>
         <TableCell>
-          <AppInPlaceEditText />
+          {{ project.name }}
         </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Description </TableHead>
         <TableCell>
+          {{ project.description }}
           <AppInPlaceEditTextarea />
         </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Status </TableHead>
         <TableCell>
+          {{ project.status }}
           <AppInPlaceEditStatus />
         </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Collaborators </TableHead>
         <TableCell>
+          {{ project.collaborators }}
           <div class="flex">
-            <Avatar class="-mr-4 border border-primary hover:scale-110 transition-transform">
+            <Avatar
+              class="-mr-4 border border-primary hover:scale-110 transition-transform"
+              v-for="collab in project.collaborators"
+              :key="collab"
+            >
+              <RouterLink class="w-full h-full flex items-center justify-center" to="">
+                <AvatarImage src="" alt="" />
+                <AvatarFallback> </AvatarFallback>
+              </RouterLink>
             </Avatar>
           </div>
         </TableCell>
       </TableRow>
     </Table>
 
-    <section class="mt-10 flex flex-col md:flex-row gap-5 justify-between grow">
+    <section v-if="project" class="mt-10 flex flex-col md:flex-row gap-5 justify-between grow">
       <div class="flex-1">
         <h2>Tasks</h2>
         <div class="table-container">
@@ -72,13 +83,12 @@ await getProjects()
                 <TableHead> Due Date </TableHead>
               </TableRow>
             </TableHeader>
+
             <TableBody>
-              <TableRow>
-                <TableCell class="p-0"> </TableCell>
-                <TableCell>
-                  <AppInPlaceEditStatus />
-                </TableCell>
+              <TableRow v-for="task in project.tasks" :key="task.id">
                 <TableCell> Lorem ipsum dolor sit amet. </TableCell>
+                <TableCell> In Progress. </TableCell>
+                <TableCell> 20/12/2025. </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -90,7 +100,7 @@ await getProjects()
           <p class="text-muted-foreground text-sm font-semibold px-4 py-3">
             This project doesn't have documents yet...
           </p>
-          <Table>
+          <!-- <Table>
             <TableHeader>
               <TableRow>
                 <TableHead> Name </TableHead>
@@ -103,7 +113,7 @@ await getProjects()
                 <TableCell> Private </TableCell>
               </TableRow>
             </TableBody>
-          </Table>
+          </Table> -->
         </div>
       </div>
     </section>
@@ -111,6 +121,9 @@ await getProjects()
 </template>
 
 <style scoped>
+@reference "tailwindcss";
+@reference "../../assets/style.css";
+
 th {
   @apply w-25;
 }
@@ -122,4 +135,4 @@ h2 {
 .table-container {
   @apply overflow-hidden overflow-y-auto rounded-md bg-slate-900 h-80;
 }
-</style> -->
+</style>
