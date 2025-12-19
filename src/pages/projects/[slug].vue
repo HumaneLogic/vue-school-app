@@ -2,7 +2,16 @@
 import { projectQuery, type Project } from '@/utils/supaQueries'
 
 const route = useRoute('/projects/[slug]')
-const project = ref<Project | null>(null)
+const project = ref<Project | null>()
+
+// watch:(source, cb, options?)
+watch(
+  () => project.value?.name,
+  () => {
+    // pageData.title is reactive but it's not reactive to its dependencies
+    usePageStore().pageData.title = `Project: ${project.value?.name || ''}`
+  },
+)
 
 const getProjects = async () => {
   const { data, error } = await projectQuery(route.params.slug)
@@ -11,15 +20,15 @@ const getProjects = async () => {
 }
 await getProjects()
 </script>
-<!--
+
 <template>
   <div>
     <h1>Project {{ route.params?.slug }}</h1>
     <RouterLink to="/">Home</RouterLink>
   </div>
-</template> -->
+</template>
 
-<template>
+<!-- <template>
   <div>
     <Table>
       <TableRow>
@@ -113,4 +122,4 @@ h2 {
 .table-container {
   @apply overflow-hidden overflow-y-auto rounded-md bg-slate-900 h-80;
 }
-</style>
+</style> -->
