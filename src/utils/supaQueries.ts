@@ -34,5 +34,5 @@ export const projectQuery = (slug: string) =>  supabase.from('projects').select(
 
 //  we get only the function type with this
 // export type Project = QueryData<typeof projectQuery>
-// we want whatever this function returns which is the query statement
+// we want whatever this function returns, which is the query statement
 export type Project = QueryData<ReturnType<typeof projectQuery>>

@@ -41,14 +41,14 @@ await getProjects()
         <TableHead> Description </TableHead>
         <TableCell>
           {{ project.description }}
-          <AppInPlaceEditTextarea />
+          <!-- <AppInPlaceEditTextarea /> -->
         </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Status </TableHead>
         <TableCell>
           {{ project.status }}
-          <AppInPlaceEditStatus />
+          <!-- <AppInPlaceEditStatus /> -->
         </TableCell>
       </TableRow>
       <TableRow>

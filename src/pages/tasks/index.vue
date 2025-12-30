@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { type TasksWithProjects, tasksWithProjectsQuery } from '@/utils/supaQueries'
 import { columns } from '@/utils/tableColumns/tasksColumns'
+
 usePageStore().pageData.title = 'My Tasks'
 
 const tasks = ref<TasksWithProjects | null>(null)
