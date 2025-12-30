@@ -54,7 +54,7 @@ await getProjects()
       <TableRow>
         <TableHead> Collaborators </TableHead>
         <TableCell>
-          {{ project.collaborators }}
+          <!-- {{ project.collaborators }} -->
           <div class="flex">
             <Avatar
               class="-mr-4 border border-primary hover:scale-110 transition-transform"
