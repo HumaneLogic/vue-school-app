@@ -121,7 +121,6 @@ await getProjects()
 </template>
 
 <style scoped>
-@reference "tailwindcss";
 @reference "../../assets/style.css";
 
 th {
