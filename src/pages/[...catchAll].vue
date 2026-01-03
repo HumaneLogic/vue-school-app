@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import AppErrorPage from '@/components/AppError/AppErrorPage.vue'
+// <!-- use a function to trigger the error component -->
+useErrorStore().setError()
 </script>
 
 <template>
-  <AppErrorPage />
+  <div></div>
 </template>
