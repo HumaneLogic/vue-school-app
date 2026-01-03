@@ -13,6 +13,8 @@ const getTasks = async () => {
   tasks.value = data
 }
 await getTasks()
+
+useErrorStore().setError({ error: Error('native js error') })
 </script>
 
 <template>
