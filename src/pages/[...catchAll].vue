@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// <!-- use a function to trigger the error component -->
-useErrorStore().setError()
+useErrorStore().setError({ error: 'Page not found', customCode: 404 })
 </script>
 
 <template>
