@@ -6,10 +6,24 @@ const error = ref(errorStore.activeError)
 
 const message = ref('')
 const customCode = ref(0)
+const details = ref('')
+const code = ref('')
+const hint = ref('')
+const statusCode = ref(0)
 
-if (error.value) {
+// if the error is not a supabase error
+if (error.value && !('code' in error.value)) {
   message.value = error.value.message
   customCode.value = error.value.customCode ?? 0
+}
+
+// if the error is a supabase query error
+if (error.value && 'code' in error.value) {
+  message.value = error.value.message
+  details.value = error.value.details
+  hint.value = error.value.hint
+  code.value = error.value.code
+  statusCode.value = error.value.statusCode ?? 0
 }
 
 router.afterEach(() => {
@@ -19,9 +33,17 @@ router.afterEach(() => {
 <template>
   <section class="error">
     <div>
-      <iconify-icon icon="tdesign:error-triangle" class="error__icon"></iconify-icon>
-      <h1 class="error__code">{{ customCode }}</h1>
+      <iconify-icon
+        icon="tdesign:error-triangle"
+        width="120"
+        height="120"
+        class="error__icon"
+      ></iconify-icon>
+      <h1 class="error__code">{{ customCode || code }}</h1>
+      <p class="error__code" v-if="statusCode">Status Code: {{ statusCode }}</p>
       <p class="error__msg">{{ message }}</p>
+      <p v-if="hint">{{ hint }}</p>
+      <p v-if="details">{{ details }}</p>
       <div class="error-footer">
         <p class="error-footer__text">You'll find lots to explore on the home page</p>
         <RouterLink to="/">
@@ -40,7 +62,7 @@ router.afterEach(() => {
 }
 
 .error__icon {
-  @apply mx-auto flex justify-center items-center  p-10;
+  @apply text-7xl text-destructive;
 }
 .error__code {
   @apply font-extrabold text-7xl text-secondary;

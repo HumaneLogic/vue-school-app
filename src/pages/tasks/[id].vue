@@ -18,8 +18,8 @@ watch(
 )
 
 const getTask = async () => {
-  const { data, error } = await taskQuery(Number(route.params.id))
-  if (error) console.log(error)
+  const { data, error, status } = await taskQuery(Number(route.params.id))
+  if (error) useErrorStore().setError({ error, customCode: status })
   task.value = data
 }
 await getTask()

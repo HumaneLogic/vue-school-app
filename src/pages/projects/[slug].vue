@@ -4,7 +4,6 @@ import { projectQuery, type Project } from '@/utils/supaQueries'
 const route = useRoute('/projects/[slug]')
 const project = ref<Project | null>(null)
 
-// watch:(source, cb, options?)
 watch(
   () => project.value?.name,
   () => {
@@ -14,19 +13,12 @@ watch(
 )
 
 const getProjects = async () => {
-  const { data, error } = await projectQuery(route.params.slug)
-  if (error) console.log(error)
+  const { data, error, status } = await projectQuery(route.params.slug)
+  if (error) useErrorStore().setError({ error, customCode: status })
   project.value = data
 }
 await getProjects()
 </script>
-
-<!-- <template>
-  <div>
-    <h1>Project {{ route.params?.slug }}</h1>
-    <RouterLink to="/">Home</RouterLink>
-  </div>
-</template> -->
 
 <template>
   <div>
@@ -41,20 +33,17 @@ await getProjects()
         <TableHead> Description </TableHead>
         <TableCell>
           {{ project.description }}
-          <!-- <AppInPlaceEditTextarea /> -->
         </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Status </TableHead>
         <TableCell>
           {{ project.status }}
-          <!-- <AppInPlaceEditStatus /> -->
         </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Collaborators </TableHead>
         <TableCell>
-          <!-- {{ project.collaborators }} -->
           <div class="flex">
             <Avatar
               class="-mr-4 border border-primary hover:scale-110 transition-transform"
@@ -100,20 +89,6 @@ await getProjects()
           <p class="text-muted-foreground text-sm font-semibold px-4 py-3">
             This project doesn't have documents yet...
           </p>
-          <!-- <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead> Name </TableHead>
-                <TableHead> Visibility </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell> Lorem ipsum dolor sit amet. </TableCell>
-                <TableCell> Private </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table> -->
         </div>
       </div>
     </section>
