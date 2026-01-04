@@ -1,6 +1,7 @@
 import type { CustomError, ExtendedPostgrestError } from "@/types/Error"
 import type { PostgrestError } from "@supabase/supabase-js"
 
+// a function for setting the error state from anywhere in the application
  export const useErrorStore = defineStore('error-store', () => {
     const activeError = ref<null | CustomError | ExtendedPostgrestError>(null)
 
