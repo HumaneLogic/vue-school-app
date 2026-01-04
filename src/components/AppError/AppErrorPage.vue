@@ -26,16 +26,19 @@ if (error.value && 'code' in error.value) {
   statusCode.value = error.value.statusCode ?? 0
 }
 
-// set error
+const ErrorTemplate = import.meta.env.DEV
+  ? defineAsyncComponent(() => import('./AppErrorDevSection.vue'))
+  : defineAsyncComponent(() => import('./AppErrorProdSection.vue'))
+
+// clear error state, when user navigates to another page
 router.afterEach(() => {
-  errorStore.activeError = null
+  errorStore.clearError()
 })
 </script>
 
 <template>
   <section class="error">
-    <AppErrorDevSection :message :customCode :details :code :hint :statusCode />
-    <!-- <AppErrorProdSection
+    <ErrorTemplate
       :message
       :customCode
       :details
@@ -43,7 +46,7 @@ router.afterEach(() => {
       :hint
       :statusCode
       :isCustomError="errorStore.isCustomError"
-    /> -->
+    />
   </section>
 </template>
 
@@ -51,17 +54,17 @@ router.afterEach(() => {
 @reference "../../assets/style.css";
 
 .error {
-  @apply mx-auto flex justify-center items-center flex-1 p-10 text-center -mt-20 min-h-[90hv];
+  @apply mx-auto flex justify-center items-center flex-1 p-10 text-center -mt-20 min-h-[90vh];
 }
 
 :deep(.error__icon) {
   @apply text-7xl text-destructive;
 }
 :deep(.error__code) {
-  @apply font-extrabold text-7xl text-secondary;
+  @apply font-extrabold text-3xl text-secondary;
 }
 :deep(.error__msg) {
-  @apply font-extrabold text-3xl text-primary;
+  @apply font-extrabold text-xl text-primary;
 }
 :deep(.error-footer) {
   @apply flex flex-col items-center justify-center gap-5 mt-6 font-light;

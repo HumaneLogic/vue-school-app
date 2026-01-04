@@ -20,11 +20,17 @@ import type { PostgrestError } from "@supabase/supabase-js"
       }
       activeError.value = error
       activeError.value.statusCode = customCode || 500
-
     }
+
+    const clearError = () => {
+      activeError.value = null
+      isCustomError.value = false
+    }
+
     return {
       activeError,
       setError,
-      isCustomError
+      isCustomError,
+      clearError
     }
  })

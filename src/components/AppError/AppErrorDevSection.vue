@@ -1,11 +1,17 @@
+<script setup lang="ts">
+defineProps<{
+  message: string
+  customCode: number
+  code: string
+  statusCode: number
+  hint: string | null
+  details: string
+}>()
+</script>
+
 <template>
   <div>
-    <iconify-icon
-      icon="lucide:triangle-alert"
-      width="120"
-      height="120"
-      class="error__icon"
-    ></iconify-icon>
+    <iconify-icon icon="lucide:triangle-alert" class="error__icon"></iconify-icon>
     <h1 class="error__code">{{ customCode || code }}</h1>
     <p class="error__code" v-if="statusCode">Status Code: {{ statusCode }}</p>
     <p class="error__msg">{{ message }}</p>
@@ -19,14 +25,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  message: string
-  customCode: number
-  code: string
-  statusCode: number
-  hint: string | null
-  details: string
-}>()
-</script>
