@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppErroProdSection: typeof import('./src/components/AppError/AppErroProdSection.vue')['default']
     AppError: typeof import('./src/components/AppError/AppErrorDevSection.vue')['default']
     AppErrorDevSection: typeof import('./src/components/AppError/AppErrorDevSection.vue')['default']
     AppErrorPage: typeof import('./src/components/AppError/AppErrorPage.vue')['default']

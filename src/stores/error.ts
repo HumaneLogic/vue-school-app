@@ -4,8 +4,12 @@ import type { PostgrestError } from "@supabase/supabase-js"
 // a function for setting the error state from anywhere in the application
  export const useErrorStore = defineStore('error-store', () => {
     const activeError = ref<null | CustomError | ExtendedPostgrestError>(null)
+    const isCustomError = ref(false)
 
     const setError = ({ error, customCode }: { error: string | PostgrestError | Error, customCode?: number }) => {
+
+      if (typeof error === 'string') { isCustomError.value = true }
+
       // if the error is not a Postgrest Error
       if (typeof error === 'string' || error instanceof Error) {
         // if error was a js error , we don't need to construct an error and we just pass the error
@@ -20,6 +24,7 @@ import type { PostgrestError } from "@supabase/supabase-js"
     }
     return {
       activeError,
-      setError
+      setError,
+      isCustomError
     }
  })
