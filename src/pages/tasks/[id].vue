@@ -95,22 +95,6 @@ await getTask()
         </TableCell>
       </TableRow>
     </Table>
-
-    <!-- <Button
-      @click="triggerDelete"
-      class="self-end mt-3 w-full max-w-40"
-      variant="destructive"
-    >
-      <Transition name="scale" mode="out-in">
-        <iconify-icon
-          v-if="deleteLoading"
-          icon="lucide:loader-circle"
-          class="mr-1 animate-spin"
-        ></iconify-icon>
-        <iconify-icon v-else icon="lucide:trash-2" class="mr-1"></iconify-icon>
-      </Transition>
-      Delete Task
-    </Button> -->
   </div>
 </template>
 
@@ -130,14 +114,3 @@ h2 {
   @apply overflow-hidden overflow-y-auto rounded-md bg-slate-900 h-80;
 }
 </style>
-
-<!-- <script setup lang="ts">
-const route = useRoute()
-</script>
-
-<template>
-  <div>
-    <h1>Task {{ route.params?.id }}</h1>
-    <RouterLink to="/">Home</RouterLink>
-  </div>
-</template> -->

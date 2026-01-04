@@ -51,3 +51,13 @@ with onErrorCaptured we capture any errors and give to useErrorStore
 use app.config.errorHandler = (error) => {} in main.ts to have highest control over error handling
 
 ---
+
+page
+store
+component
+
+user goes to a page route,
+this sets a global data in store,
+a component uses that global data and displays it
+
+---
