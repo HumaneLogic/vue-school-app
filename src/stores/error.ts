@@ -7,19 +7,27 @@ import type { PostgrestError } from "@supabase/supabase-js"
     const isCustomError = ref(false)
 
     const setError = ({ error, customCode }: { error: string | PostgrestError | Error, customCode?: number }) => {
-
-      if (typeof error === 'string') { isCustomError.value = true }
-
-      // if the error is not a Postgrest Error
-      if (typeof error === 'string' || error instanceof Error) {
-        // if error was a js error , we don't need to construct an error and we just pass the error
-        activeError.value = typeof error === 'string' ? Error(error) : error
-        // 500 will be used for js errors
-        activeError.value.customCode = customCode || 500
+      if (typeof error === 'string') {
+        isCustomError.value = true
+        const customError = new Error(error) as CustomError
+        customError.customCode = customCode || 500
+        activeError.value = customError
         return
       }
-      activeError.value = error
-      activeError.value.statusCode = customCode || 500
+
+      if (error instanceof Error) {
+        // Check if it's a PostgrestError by looking for specific properties
+        if ('code' in error && 'details' in error && 'message' in error && 'hint' in error) {
+          const extendedError = error as ExtendedPostgrestError
+          extendedError.statusCode = customCode || 500
+          activeError.value = extendedError
+        } else {
+          const customError = error as CustomError
+          customError.customCode = customCode || 500
+          activeError.value = customError
+        }
+        return
+      }
     }
 
     const clearError = () => {
