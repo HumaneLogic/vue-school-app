@@ -1,9 +1,9 @@
-export const usePageStore = defineStore('page-store',() => {
-    const pageData = ref({
-      title: ''
-    })
+export const usePageStore = defineStore('page-store', () => {
+  const pageData = ref({
+    title: '',
+  })
   return {
-    pageData
+    pageData,
   }
 })
 if (import.meta.hot) {
