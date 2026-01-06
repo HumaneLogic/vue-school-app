@@ -8,7 +8,7 @@ const links = [
   {
     title: 'Projects',
     to: '/projects',
-    icon: 'lucide:house',
+    icon: 'lucide:building-2',
   },
   {
     title: 'My Tasks',
@@ -21,7 +21,7 @@ const accountLinks = [
   {
     title: 'Profile',
     to: '/profile',
-    icon: 'iconoir:profile-circle',
+    icon: 'lucide:user',
   },
   {
     title: 'Settings',
@@ -30,8 +30,7 @@ const accountLinks = [
   },
   {
     title: 'Sign Out',
-    to: '/signout',
-    icon: 'si:sign-out-alt-line',
+    icon: 'lucide:log-out',
   },
 ]
 </script>
