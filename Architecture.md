@@ -61,3 +61,14 @@ this sets a global data in store,
 a component uses that global data and displays it
 
 ---
+
+create tables in postgres with writing migrations
+fill tables with faker in seed.js
+
+---
+
+components
+pages
+App.vue
+
+---
