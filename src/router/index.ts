@@ -6,13 +6,23 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to) => {
-  const { user } = storeToRefs(useAuthStore())
+// beforeEach is fast and might happen before routing happens so store might not be updated yet
+// we need to be sure that the store updates before we start verifying whether we have a logged in user or not inside the route guard
+router.beforeEach(async (to) => {
+  const authStore = useAuthStore()
+  await authStore.getSession()
 
-  // if (!user.value && to.path !== '/login' && to.path !== '/register')
-  if (!user.value && !['/login', '/register'].includes(to.path)) {
+  const isAuthPage = ['/login', '/register'].includes(to.path)
+
+  if (!authStore.user && !isAuthPage) {
     return {
       name: '/login',
+    }
+  }
+
+  if (authStore.user && isAuthPage) {
+    return {
+      name: '/',
     }
   }
 })
