@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth-store', () => {
     user.value = userSession.user
     await setProfile()
   }
-
+  // used in router/index.ts
   const getSession = async () => {
     onMounted(async () => {
       const { data } = await supabase.auth.getSession()
