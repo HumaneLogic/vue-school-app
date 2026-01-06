@@ -53,6 +53,7 @@ declare global {
   const shallowRef: typeof import('vue').shallowRef
   const storeRefs: typeof import('pinia').storeRefs
   const storeToRefs: typeof import('pinia').storeToRefs
+  const tackAuthChanges: typeof import('./src/stores/auth').tackAuthChanges
   const toRaw: typeof import('vue').toRaw
   const toRef: typeof import('vue').toRef
   const toRefs: typeof import('vue').toRefs

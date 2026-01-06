@@ -6,9 +6,4 @@ const router = createRouter({
   routes,
 })
 
-//  before each navigation, check if user is logged in
-router.beforeEach(async () => {
-  const { getSession } = useAuthStore()
-  await getSession()
-})
 export default router
