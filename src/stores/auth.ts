@@ -13,7 +13,7 @@ export const useAuthStore = defineStore('auth-store', () => {
       return
     }
 
-    // only fetch the profile if we don't have profile id or it doesn't match the current logged in user id
+    // fetch the profile if we don't have profile id or it doesn't match the current logged in user id
     if (!profile.value || profile.value.id !== user.value.id) {
       const { data } = await profileQuery(user.value.id)
       profile.value = data || null
@@ -23,17 +23,17 @@ export const useAuthStore = defineStore('auth-store', () => {
   const setAuth = async (userSession: null | Session = null) => {
     if (!userSession) {
       user.value = null
+      profile.value = null
       return
     }
     user.value = userSession.user
     await setProfile()
   }
+
   // used in router/index.ts
   const getSession = async () => {
-    onMounted(async () => {
-      const { data } = await supabase.auth.getSession()
-      if (data.session?.user) await setAuth(data.session)
-    })
+    const { data } = await supabase.auth.getSession()
+    if (data.session?.user) await setAuth(data.session)
   }
 
   return {

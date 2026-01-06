@@ -31,9 +31,20 @@ export const login = async (formData: LoginForm) => {
     email: formData.email,
     password: formData.password,
   })
+
   if (error) return console.log('login err:', error)
 
   await authStore.setAuth(data.session)
+
+  return true
+}
+
+export const logout = async () => {
+  const { error } = await supabase.auth.signOut()
+
+  if (error) return console.log('logout err:', error)
+
+  await authStore.setAuth()
 
   return true
 }
