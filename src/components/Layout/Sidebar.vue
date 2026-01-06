@@ -34,13 +34,16 @@ const accountLinks = [
   },
 ]
 
+const router = useRouter()
+
 const executeAction = async (linkTitle: string) => {
   if (linkTitle === 'Sign Out') {
     // pinia needs to be executed before router
     // use dynamic import so supaAuth file doesn't get loaded/included in bundle except when executeAction is triggered
     // and executeAction is executed only after pinia is ready
     const { logout } = await import('@/utils/supaAuth')
-    await logout()
+    const isLoggedOut = await logout()
+    if (isLoggedOut) router.push('/login')
   }
 }
 </script>
