@@ -6,11 +6,16 @@ const formData = ref({
   password: '',
 })
 
+const _error = ref('')
+
 const router = useRouter()
 
 const signIn = async () => {
-  const isLoggedIn = await login(formData.value)
-  if (isLoggedIn) router.push('/')
+  const { error } = await login(formData.value)
+  if (!error) return router.push('/')
+
+  _error.value =
+    error.message === 'Invalid login credentials' ? 'Incorrect email or password' : error.message
 }
 </script>
 
@@ -35,6 +40,7 @@ const signIn = async () => {
               placeholder="johndoe19@example.com"
               required
               v-model="formData.email"
+              :class="{ 'border-red-500': _error }"
             />
           </div>
           <div class="grid gap-2">
@@ -48,8 +54,14 @@ const signIn = async () => {
               autocomplete
               required
               v-model="formData.password"
+              :class="{ 'border-red-500': _error }"
             />
           </div>
+
+          <ul v-if="_error" class="text-sm text-left text-red-500">
+            <li class="list-dist">{{ _error }}</li>
+          </ul>
+
           <Button type="submit" class="w-full"> Login </Button>
         </form>
         <div class="mt-4 text-sm text-center">
