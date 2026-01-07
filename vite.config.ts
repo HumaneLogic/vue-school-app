@@ -12,40 +12,41 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   plugins: [
     VueRouter(),
-    Components({ /* options */ }),
+    Components({
+      /* options */
+    }),
     AutoImport({
       include: [
-    /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-    /\.vue$/,
-    /\.vue\?vue/, // .vue
-    /\.vue\.[tj]sx?\?vue/, // .vue (vue-loader with experimentalInlineMatchResource enabled)
-    /\.md$/, // .md
-  ],
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+        /\.vue\.[tj]sx?\?vue/, // .vue (vue-loader with experimentalInlineMatchResource enabled)
+        /\.md$/, // .md
+      ],
       imports: [
         'vue',
         VueRouterAutoImports,
         {
-          'pinia': ['defineStore', 'storeToRefs', 'acceptHMRUpdate'  ]
-        }
-  ],
+          pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate'],
+        },
+      ],
       dts: true,
       viteOptimizeDeps: true,
-      dirs: ['src/stores']
-
-}),
+      dirs: ['src/stores/**', 'src/composables/**'],
+    }),
     vue({
       template: {
         compilerOptions: {
-          isCustomElement: element => element.startsWith('iconify-icon')
-        }
-      }
+          isCustomElement: (element) => element.startsWith('iconify-icon'),
+        },
+      },
     }),
     tailwindcss(),
     vueDevTools(),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 })
