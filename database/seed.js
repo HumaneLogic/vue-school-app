@@ -3,7 +3,7 @@
 import { fakerEN_US as faker } from '@faker-js/faker'
 import { createClient } from '@supabase/supabase-js'
 
-const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.SECRET_BACKEND_KEY)
+const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.SERVICE_ROLE_KEY)
 
 const testingUserEmail = process.env.TESTING_USER_EMAIL
 if (!testingUserEmail) {

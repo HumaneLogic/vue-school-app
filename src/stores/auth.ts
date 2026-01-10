@@ -14,9 +14,8 @@ export const useAuthStore = defineStore('auth-store', () => {
       return
     }
 
-    // fetch the profile if we don't have profile id or it doesn't match the current logged in user id
     if (!profile.value || profile.value.id !== user.value.id) {
-      const { data } = await profileQuery(user.value.id)
+      const { data } = await profileQuery({ column: 'Id', value: user.value.id })
       profile.value = data || null
     }
   }

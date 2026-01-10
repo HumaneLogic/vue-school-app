@@ -39,7 +39,7 @@ export const projectQuery = (slug: string) =>
 
 //  we get only the function type with this
 // export type Project = QueryData<typeof projectQuery>
-// ReturnType tells typescript that we don't want to get the function type but we want whatever this function returns, which is the query statement
+// ReturnType tells typescript that we don't want to get the function type ,instead we want whatever this function returns, which is the query statement
 export type Project = QueryData<ReturnType<typeof projectQuery>>
 
 export const taskQuery = (id: number) => {
@@ -60,6 +60,7 @@ export const taskQuery = (id: number) => {
 }
 export type Task = QueryData<ReturnType<typeof taskQuery>>
 
-export const profileQuery = (id: string) => {
-  return supabase.from('profiles').select().eq('id', id).single()
+// if column is id,value is a specific id, if column is a username,value is a specific username
+export const profileQuery = ({ column, value }: { column: string; value: string }) => {
+  return supabase.from('profiles').select().eq(column, value).single()
 }
