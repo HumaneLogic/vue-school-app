@@ -1,10 +1,13 @@
 import type { LoginForm } from '@/types/AuthForm'
 import type { AuthError } from '@supabase/supabase-js'
 
-//  returning a reactive state from a composable so we use it globally
+type formErrors<Type> = {
+  [Property in keyof Type]: string[]
+}
+
 export const useFormErrors = () => {
   const serverError = ref('')
-  const realTimeErrors = ref()
+  const realTimeErrors = ref<formErrors<LoginForm>>()
 
   const handleServerError = (error: AuthError) => {
     serverError.value =
