@@ -7,7 +7,6 @@ const project = ref<Project | null>(null)
 watch(
   () => project.value?.name,
   () => {
-    // pageData.title is reactive but it's not reactive to its dependencies
     usePageStore().pageData.title = `Project: ${project.value?.name || ''}`
   },
 )

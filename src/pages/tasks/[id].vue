@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { taskQuery, type Task } from '@/utils/supaQueries'
 
-// define a ref to store the task data
-// write a function to fetch the task
-// set up supabase query and define the query type
-// use watch to update the page title
-// update the template with the fetched data
-
 const route = useRoute('/tasks/[id]')
 const task = ref<Task | null>(null)
 
