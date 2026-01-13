@@ -13,7 +13,7 @@ const links = [
   {
     title: 'My Tasks',
     to: '/tasks',
-    icon: 'streamline-freehand:task-list-pin-1',
+    icon: 'lucide:badge-check',
   },
 ]
 
@@ -26,7 +26,7 @@ const accountLinks = [
   {
     title: 'Settings',
     to: '/settings',
-    icon: 'line-md:cog-filled-loop',
+    icon: 'lucide:cog',
   },
   {
     title: 'Sign Out',

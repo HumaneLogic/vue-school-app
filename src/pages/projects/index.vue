@@ -9,6 +9,12 @@ const { projects } = storeToRefs(projectsLoader)
 const { getProjects } = projectsLoader
 
 await getProjects()
+
+const { getProfilesByIds } = useCollabs()
+const test = await getProfilesByIds(projects.value[0].collaborators)
+console.log('Test ::', test)
+
+// getGroupedCollabs(projects.value)
 </script>
 
 <template>
