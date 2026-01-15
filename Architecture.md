@@ -85,16 +85,16 @@ serve users with cached data while querying db for updating cache ,
 so if data changed,when user navigating away and back to page,cache is served and data is updated
 
 first time user visits /projects page:
-it has a delay and display loading data for a moment because query db runs
+query db so it has a delay and displays loading data for a moment
 
-but next time user visits /projects page:
-1.serve cache to user
-2.query db : if db and cache are not in sync, replace cache with data from db
-vue will only update the parts that has been changed
+next time user visits /projects page:
+1.serve cache to user without delay
+2.and query db at the same time : if db and cache are not in sync, replace cache with data from db
+vue will only update the parts of template that has been changed
 
 we have two things :
-reactive variable (store)
-function to query db and sync cache with db
+reactive variable (using ref in vue instance and v-bind in template and using pinia store)
+function to query db and update cache
 
 ---
 
