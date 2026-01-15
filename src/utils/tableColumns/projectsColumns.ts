@@ -1,4 +1,5 @@
 import Avatar from '@/components/ui/avatar/Avatar.vue'
+import AvatarFallback from '@/components/ui/avatar/AvatarFallback.vue'
 import AvatarImage from '@/components/ui/avatar/AvatarImage.vue'
 import type { GroupedCollabs } from '@/types/GroupedCollabs'
 import type { Projects } from '@/utils/supaQueries'
@@ -35,9 +36,17 @@ export const columns = (collabs: Ref<GroupedCollabs>): ColumnDef<Projects[0]>[] 
       return h(
         'div',
         { class: 'text-left font-medium' },
-        collabs.value[row.original.id]?.map((collab) => {
-          return h(Avatar, () => h(AvatarImage, { src: collab.avatar_url || '' }))
-        }),
+        collabs.value[row.original.id]
+          ? collabs.value[row.original.id]?.map((collab) => {
+              return h(RouterLink, { to: `/users/${collab.username}` }, () => {
+                return h(Avatar, { class: 'hover:scale-110 transition-transport' }, () =>
+                  h(AvatarImage, { src: collab.avatar_url || '' }),
+                )
+              })
+            })
+          : row.original.collaborators.map(() => {
+              return h(Avatar, { class: 'animate-pulse' }, () => h(AvatarFallback))
+            }),
       )
     },
   },
