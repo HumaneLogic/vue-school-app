@@ -14,6 +14,7 @@ export type TasksWithProjects = QueryData<typeof tasksWithProjectsQuery>
 export const projectsQuery = supabase.from('projects').select()
 export type Projects = QueryData<typeof projectsQuery>
 
+// get a single project by slug from db
 export const projectQuery = (slug: string) =>
   supabase
     .from('projects')
