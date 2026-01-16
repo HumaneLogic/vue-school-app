@@ -14,9 +14,10 @@ await getProjects()
 const { getGroupedCollabs, groupedCollabs } = useCollabs()
 
 // this is an async function,so it doesn't block main thread, it initializes db query and hands back the control to main thread so it runs other functions or do other things
-// if we use await here, first we query db then only when all the requests are resolved, we render the page
-// if we remove await, we render the page and query db for collabs at the same time and when query is resolved,we show it
-getGroupedCollabs(projects.value)
+// if we use await here: first we query db then only when all the requests are resolved, we render the page
+// if we remove await: we render the page and query db for collabs at the same time and when query is resolved,we render collabs to the page
+// we use ?? null coalescing operator so this means if we don't have any projects available ,we get an empty array
+getGroupedCollabs(projects.value ?? [])
 
 const columnsWithCollabs = columns(groupedCollabs)
 </script>
