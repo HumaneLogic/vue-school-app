@@ -21,7 +21,7 @@ await getProject(slug)
       <TableRow>
         <TableHead> Name </TableHead>
         <TableCell>
-          {{ project.name }}
+          <AppInPlaceEditText v-model="project.name" />
         </TableCell>
       </TableRow>
       <TableRow>
