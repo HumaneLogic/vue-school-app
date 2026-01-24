@@ -21,7 +21,7 @@ await getProject(slug)
       <TableRow>
         <TableHead> Name </TableHead>
         <TableCell>
-          <AppInPlaceEditText v-model="project.name" />
+          <AppInPlaceEditText v-model="project.name" @commit="console.log('changed')" />
         </TableCell>
       </TableRow>
       <TableRow>
