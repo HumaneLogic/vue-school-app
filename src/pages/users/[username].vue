@@ -8,6 +8,8 @@ import type { Tables } from 'database/types'
 // get the username parameter from the URL dynamically and fetch that user from database
 const { username } = useRoute('/users/[username]').params
 
+usePageStore().pageData.title = ''
+
 const profile = ref<Tables<'profiles'> | null>(null)
 
 const getTasks = async () => {

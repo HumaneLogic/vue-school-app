@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AppInPlaceEditStatus from '@/components/AppInPlaceEdit/AppInPlaceEditStatus.vue'
+
 // #TODO
 // 1.if update is to the project name then update the url slug(maybe use id or name instead of slug or we can go to projects using any one of those 3 )
 // 2.redirect from old url slug to new url slug
@@ -19,6 +21,12 @@ watch(
 )
 
 await getProject(slug)
+
+const { getProfilesByIds } = useCollabs()
+
+const collabs = project.value?.collaborators
+  ? await getProfilesByIds(project.value?.collaborators)
+  : []
 </script>
 
 <template>
@@ -50,11 +58,14 @@ await getProject(slug)
           <div class="flex">
             <Avatar
               class="-mr-4 border border-primary hover:scale-110 transition-transform"
-              v-for="collab in project.collaborators"
-              :key="collab"
+              v-for="collab in collabs"
+              :key="collab.id"
             >
-              <RouterLink class="w-full h-full flex items-center justify-center" to="">
-                <AvatarImage src="" alt="" />
+              <RouterLink
+                class="w-full h-full flex items-center justify-center"
+                :to="{ name: '/users/[username]', params: { username: collab.username } }"
+              >
+                <AvatarImage :src="collab.avatar_url || ''" alt="" />
                 <AvatarFallback> </AvatarFallback>
               </RouterLink>
             </Avatar>
@@ -78,9 +89,17 @@ await getProject(slug)
 
             <TableBody>
               <TableRow v-for="task in project.tasks" :key="task.id">
-                <TableCell> Lorem ipsum dolor sit amet. </TableCell>
-                <TableCell> In Progress. </TableCell>
-                <TableCell> 20/12/2025. </TableCell>
+                <TableCell class="p-0">
+                  <RouterLink
+                    class="text-left block hover:bg-muted p-4"
+                    :to="{ name: '/tasks/[id]', params: { id: task.id } }"
+                    >{{ task.name }}
+                  </RouterLink>
+                </TableCell>
+                <TableCell>
+                  <AppInPlaceEditStatus readonly :model-value="task.status" />
+                </TableCell>
+                <TableCell> {{ task.due_date }} </TableCell>
               </TableRow>
             </TableBody>
           </Table>

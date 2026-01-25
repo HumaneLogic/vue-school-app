@@ -12,7 +12,7 @@ export const useCollabs = () => {
 
   const getGroupedCollabs = async (items: Projects | TasksWithProjects) => {
     const filteredItems = items.filter((item) => item.collaborators.length)
-    // get profiles from tasks or projects with collaborators id
+    // get profiles from projects using collaborator's id - get id from projects or tasks
     const promises = filteredItems.map((item) => getProfilesByIds(item.collaborators))
 
     // all promises will run in parallel(they will not wait for each other to complete)
