@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import AppInPlaceEditStatus from '@/components/AppInPlaceEdit/AppInPlaceEditStatus.vue'
-
 // #TODO
 // 1.if update is to the project name then update the url slug(maybe use id or name instead of slug or we can go to projects using any one of those 3 )
 // 2.redirect from old url slug to new url slug
@@ -43,7 +41,7 @@ const collabs = project.value?.collaborators
       <TableRow>
         <TableHead> Description </TableHead>
         <TableCell>
-          <AppInPlaceEditText v-model="project.description" @commit="updateProject" />
+          <AppInPlaceEditTextarea v-model="project.description" @commit="updateProject" />
         </TableCell>
       </TableRow>
       <TableRow>
