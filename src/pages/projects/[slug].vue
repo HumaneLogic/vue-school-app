@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AppInPlaceEditStatus from '@/components/AppInPlaceEdit/AppInPlaceEditStatus.vue'
+
 // #TODO
 // 1.if update is to the project name then update the url slug(maybe use id or name instead of slug or we can go to projects using any one of those 3 )
 // 2.redirect from old url slug to new url slug
@@ -35,13 +37,13 @@ await getProject(slug)
       <TableRow>
         <TableHead> Description </TableHead>
         <TableCell>
-          {{ project.description }}
+          <AppInPlaceEditText v-model="project.description" @commit="updateProject" />
         </TableCell>
       </TableRow>
       <TableRow>
         <TableHead> Status </TableHead>
         <TableCell>
-          {{ project.status }}
+          <AppInPlaceEditStatus v-model="project.status" />
         </TableCell>
       </TableRow>
       <TableRow>
