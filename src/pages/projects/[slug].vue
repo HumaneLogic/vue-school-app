@@ -1,9 +1,15 @@
 <script setup lang="ts">
+// #TODO
+// 1.if update is to the project name then update the url slug(maybe use id or name instead of slug or we can go to projects using any one of those 3 )
+// 2.redirect from old url slug to new url slug
+// 3.add pop up window: edit project by clicking on different sections
+// 4.add show history - so it's a version control system - maybe make it tied to github,gitlab and other systems
+
 const { slug } = useRoute('/projects/[slug]').params
 
 const projectsLoader = useProjectsStore()
 const { project } = storeToRefs(projectsLoader)
-const { getProject } = projectsLoader
+const { getProject, updateProject } = projectsLoader
 
 watch(
   () => project.value?.name,
@@ -21,7 +27,9 @@ await getProject(slug)
       <TableRow>
         <TableHead> Name </TableHead>
         <TableCell>
-          <AppInPlaceEditText v-model="project.name" @commit="console.log('changed')" />
+          <!-- we pass project.name to child component which has const value = defineModel() and v-model="value" -->
+          <!-- this is two way binding with a custom component  -->
+          <AppInPlaceEditText v-model="project.name" @commit="updateProject" />
         </TableCell>
       </TableRow>
       <TableRow>
