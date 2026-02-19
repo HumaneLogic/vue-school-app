@@ -23,7 +23,7 @@ export const useCollabs = () => {
     //  { "projects-id-1": [{profiles...}] ,
     //  "projects-id-2": [{profiles...}] }
     filteredItems.forEach((item, index) => {
-      groupedCollabs.value[item.id] = results[index]
+      groupedCollabs.value[item.id] = results[index] ?? []
     })
   }
 
