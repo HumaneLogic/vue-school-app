@@ -31,8 +31,8 @@ export const useFormErrors = () => {
 
   return {
     serverError,
-    handleServerError,
     realTimeErrors,
+    handleServerError,
     handleLoginForm,
   }
 }
